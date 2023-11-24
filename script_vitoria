@@ -1,0 +1,56 @@
+	CREATE DATABASE prova_vitoria;
+
+	USE prova_vitoria;
+
+	CREATE TABLE pessoa(
+	id int(11) PRIMARY KEY NOT NULL auto_increment,
+	nome varchar(4000) NOT NULL
+	);
+
+	SET SQL_MODE="";
+
+	SET SQL_MODE ="STRIC_ALL_TABLES";
+
+	SELECT * FROM (pessoa);
+    
+    SELECT * FROM pessoa WHERE id=19;
+    
+    SELECT count(*) from pessoa where nome like 'GEORGE ALEXANDRE FERREIRA DANTAS';
+
+	UPDATE pessoa SET nome= 'VITÓRIA DUTRA SOARES' WHERE id=19;
+
+	SELECT * FROM pessoa WHERE id= 19;
+
+	UPDATE pessoa SET nome= 'VITÓRIA DUTRA SOARES' WHERE id=190;
+
+	SELECT * FROM pessoa WHERE id= 190;
+
+	UPDATE pessoa SET nome= 'VITÓRIA DUTRA SOARES' WHERE id=1900;
+    
+    SELECT * FROM pessoa WHERE id= 1900;
+
+    
+	SELECT count(*) FROM pessoa;
+    
+    
+CREATE TABLE unidade_requisitante (
+  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  unidade VARCHAR(500) NOT NULL UNIQUE
+);
+
+alter table unidade_requisitante add column fk_pessoa int(11);
+
+alter table unidade_requisitante add constraint id_fk_pessoa
+foreign key(id) references pessoa (id);
+
+select p.id, p.nome, ur.fk_pessoa, ur.id, ur.unidade from pessoa p
+inner join unidade_requisitante ur
+on p.id = ur.fk_pessoa limit 100;
+
+select p.id, p.nome, ur.fk_pessoa, ur.id, ur.unidade from pessoa p
+inner join unidade_requisitante ur
+on p.id = ur.fk_pessoa WHERE p.id in (19, 190, 1900);
+
+
+
+DROP TABLE unidade_requisitante;
